@@ -111,14 +111,14 @@ M.is_image_url = function(str)
   end
 
   -- assume its a valid image link if it the url ends with an extension
-  if str:match("%.png$") or str:match("%.jpg$") or str:match("%.jpeg$") then
+  if str:match("%.png$") or str:match("%.jpg$") or str:match("%.jpeg$") or str:match("%.webp$") then
     return true
   end
 
   -- send a head request to the url and check content type
   local command = string.format("curl -s -I -w '%%{content_type}' '%s'", str)
   local output, exit_code = M.execute(command)
-  return exit_code == 0 and output ~= nil and (output:match("image/png") ~= nil or output:match("image/jpeg") ~= nil)
+  return exit_code == 0 and output ~= nil and (output:match("image/png") ~= nil or output:match("image/jpeg") ~= nil or output:match("image/webp") ~= nil)
 end
 
 ---@param str string
@@ -130,6 +130,7 @@ M.is_image_path = function(str)
   local has_image_ext = str:match("^.*%.(png)$") ~= nil
     or str:match("^.*%.(jpg)$") ~= nil
     or str:match("^.*%.(jpeg)$") ~= nil
+    or str:match("^.*%.(webp)$") ~= nil
 
   return has_path_sep and has_image_ext
 end
