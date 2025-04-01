@@ -48,7 +48,7 @@ M.content_is_image = function()
     local output = util.execute("wl-paste --list-types")
     return output ~= nil and output:find("image/png") ~= nil
 
-  -- MacOS (pngpaste) 
+  -- MacOS (pngpaste)
   elseif cmd == "pngpaste" then
     local _, exit_code = util.execute("pngpaste -")
     return exit_code == 0
@@ -83,7 +83,7 @@ M.save_image = function(file_path)
     local _, exit_code = util.execute(command)
     return exit_code == 0
 
-  -- MacOS (pngpaste) 
+  -- MacOS (pngpaste)
   elseif cmd == "pngpaste" then
     local command = string.format('pngpaste - %s> "%s"', process_cmd:gsub("%%", "%%%%"), file_path)
     local _, exit_code = util.execute(command)
