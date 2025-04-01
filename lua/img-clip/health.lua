@@ -28,15 +28,10 @@ M.check = function()
 
   -- MacOS
   elseif util.has("mac") then
-    if util.executable("osascript") then
-      ok("`osascript` is installed")
-    else
-      error("`osascript` is not installed")
-    end
     if util.executable("pngpaste") then
       ok("`pngpaste` is installed")
     else
-      warn("`pngpaste` is not installed")
+      error("`pngpaste` is not installed")
     end
 
   -- Windows
